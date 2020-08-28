@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 import {firestoreConnect} from 'react-redux-firebase'
 import {compose} from 'redux'
 import { Redirect } from 'react-router-dom'
+import useWindowSize from 'react-use/lib/useWindowSize'
+import Confetti from 'react-confetti'
 
 class Dashboard extends Component {
   render() {
@@ -13,8 +15,17 @@ class Dashboard extends Component {
     const { projects,auth ,notifications} = this.props;
     if(!auth.uid) return <Redirect to="/signin" />
 
+   
+
     return (
       <div className="dashboard container">
+      <Confetti
+      width={1800}
+      height={1500}
+      numberOfPieces={2000}
+      recycle={false}
+    />
+    
         <div className="row">
           <div className="col s12 m6">
             <ProjectList projects={projects} />

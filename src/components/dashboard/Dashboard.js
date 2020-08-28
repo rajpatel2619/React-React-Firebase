@@ -5,8 +5,8 @@ import { connect } from 'react-redux'
 import {firestoreConnect} from 'react-redux-firebase'
 import {compose} from 'redux'
 import { Redirect } from 'react-router-dom'
-import useWindowSize from 'react-use/lib/useWindowSize'
 import Confetti from 'react-confetti'
+
 
 class Dashboard extends Component {
   render() {
@@ -20,8 +20,8 @@ class Dashboard extends Component {
     return (
       <div className="dashboard container">
       <Confetti
-      width={1800}
-      height={1500}
+      width={this.props.windowWith}
+      height={this.props.windowHeight}
       numberOfPieces={2000}
       recycle={false}
     />
@@ -50,7 +50,7 @@ const mapStateToProps = (state) => {
 export default compose(
   connect(mapStateToProps),
   firestoreConnect([
-    {collection:'projects',limit:5,orderBy:['createdAt','desc']},
+    {collection:'projects',limit:4,orderBy:['createdAt','desc']},
     {collection:'notifications',limit:3,orderBy:['time','desc']},
   ])
 )(Dashboard)

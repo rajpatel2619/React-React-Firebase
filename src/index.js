@@ -9,6 +9,10 @@ import thunk from 'redux-thunk'
 import { reduxFirestore, getFirestore } from 'redux-firestore';
 import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
 import fbConfig from './config/fbConfig'
+import { Offline, Online } from "react-detect-offline";
+import Off from './offline';
+
+
 
 const store = createStore(rootReducer,
   compose(
@@ -20,6 +24,18 @@ const store = createStore(rootReducer,
 
 store.firebaseAuthIsReady.then(()=>{
 
-  ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
+  ReactDOM.render(
+    <div>
+      <Online>
+    
+         <Provider store={store}><App /></Provider>   
+      </Online>
+      <Offline>
+        <Off />
+    </Offline>
+  </div>
+  
+  
+  , document.getElementById('root'));
 })
 
